@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '9.3.1'
+}
+
+group = 'tech.purelove'
+version = '0.1'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://nexus.scarsz.me/content/groups/public/' }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT'
+    compileOnly 'com.discordsrv:discordsrv:1.28.0'
+}
+
+tasks.register('restartServer', Exec) {
+    environment System.getenv()
+    workingDir 'C:\\Users\\total\\Documents\\Servers\\Server Start Files'
+    commandLine 'cmd', '/c', 'C:\\Users\\total\\Documents\\Servers\\Server Start Files\\restart.bat'
+}
+
+shadowJar {
+    archiveClassifier.set('')
+    destinationDirectory.set(file("C:\\Users\\total\\Documents\\Servers\\Dev Server\\plugins"))
+    finalizedBy(restartServer)
+}
+
+def targetJavaVersion = 21
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
