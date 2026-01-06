@@ -5,8 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import tech.purelove.listeners.DiscordWhitelistListener;
 import tech.purelove.util.LogUtils;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class TWSWhitelistPlugin extends JavaPlugin {
 
     private String whitelistChannelId;

@@ -16,3 +16,26 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT'
     compileOnly 'com.discordsrv:discordsrv:1.28.0'
 }
+
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release.set(21)
+}
+
+processResources {
+    inputs.property 'version', version
+    filesMatching('plugin.yml') {
+        expand version: version
+    }
+}
+
+shadowJar {
+    archiveClassifier.set('')
+}
