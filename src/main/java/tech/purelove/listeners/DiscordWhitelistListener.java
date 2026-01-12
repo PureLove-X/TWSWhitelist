@@ -56,10 +56,9 @@ public class DiscordWhitelistListener {
         Bukkit.getScheduler().runTask(plugin, () -> {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
 
-            LogUtils.green(
+            LogUtils.green(username + " " +
                     actionText
                             + " by " + event.getAuthor().getName()
-                            + " → " + username
             );
 
             // Discord reply
