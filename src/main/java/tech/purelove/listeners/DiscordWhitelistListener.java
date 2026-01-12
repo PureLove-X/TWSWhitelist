@@ -57,7 +57,7 @@ public class DiscordWhitelistListener {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
 
             LogUtils.green(
-                    "Whitelist " + actionText
+                    actionText
                             + " by " + event.getAuthor().getName()
                             + " → " + username
             );
