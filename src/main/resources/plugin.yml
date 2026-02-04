@@ -1,6 +1,5 @@
 name: TWS_Whitelist
-version: 0.1
+version: 2.0.0
 author: PureLove
-main: tech.purelove.TWSWhitelistPlugin
+main: tech.purelove.twswhitelist.TWSWhitelistPlugin
 api-version: 1.21
-depend: [DiscordSRV]
