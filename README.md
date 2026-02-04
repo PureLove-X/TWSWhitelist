@@ -26,12 +26,11 @@ If you’re not running a similar setup, expect to need changes.
 
 Applications are handled entirely inside Discord ticket channels and include the following features:
 ### Commands
-Commands can be used by users who have the staff role configured inside the plugin. 
-They can be used anywhere in the discord server.
-`/whitelist add <username>`
-`/whitelist remove <username>`
-
-The commands will send feedback based on if the username exists or not. 
+- Commands can be used by users who have the staff role configured inside the plugin. 
+- They can be used anywhere in the discord server.
+  - `/whitelist add <username>`
+  - `/whitelist remove <username>`
+- The commands will send feedback based on if the username exists or not. 
 
 ### Automatic Staff Dashboard
 - When a new application ticket is created, the plugin automatically posts a **staff dashboard**
