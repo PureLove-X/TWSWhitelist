@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'tech.purelove'
-version = '0.1'
+version = '2.0.0'
 
 repositories {
     mavenCentral()
@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
+    implementation("net.dv8tion:JDA:5.0.0-beta.24")
     compileOnly 'org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT'
-    compileOnly 'com.discordsrv:discordsrv:1.28.0'
 }
 
 

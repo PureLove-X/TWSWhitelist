@@ -1,4 +1,4 @@
-package tech.purelove.util;
+package tech.purelove.twswhitelist.util;
 
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;

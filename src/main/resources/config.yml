@@ -1,3 +1,90 @@
-Discord:
-  Channel_ID: "1458178361628299459"
-  Command_Prefix: "!Whitelist"
+Bot:
+  token: "BOT_TOKEN_HERE"
+  server_id: "server_id"
+
+Roles:
+  staff_role_id: "role_ID"
+  #    Everyone can see the buttons but only users with this role will be able to interact with them
+  approved_role_id: "role_ID"
+  #    The role you want people to get when approved
+  denied_role_id: "role_ID"
+  #    The role you want people to get when denied
+  noapp_role_id: "role_ID"
+  #    The role people have when making the application.
+
+Channels:
+  application_category_id: "category_id"
+  #   The category whitelist applications are made in
+  whitelist_log_channel_id: "channel_id"
+  #   The channel where you want whitelist logs to go to.
+  rewhitelist_channel_id: "channel_id"
+  #    The channel where rewhitelist requests are posted
+
+Messages:
+  # Each '-' is a new line in that message. To skip a line do "".
+  # I tried using a block scalar ( the | ) but I found that discord would collapse the messages
+  # so until I can figure out a way around it this is the way I have to do it.
+  Staff:
+    approve:
+      success:
+        - "✅ **Whitelist successful**"
+        - "🧍 Applicant: **{applicant}**"
+        - "📝 Username: `{username}`"
+      failed:
+        - "❌ Whitelist failed."
+        - "Invalid Minecraft username."
+      error:
+        - "❌ An internal error occurred while whitelisting."
+      timeout:
+        - "❌ Whitelist timed out. Try again."
+    applicant_error:
+      - "❌ Unable to determine the applicant."
+      - "No user with the NoApp role is in this channel"
+
+  Player:
+    approved:
+      - "{mention}"
+      - ""
+      - "🎉 **Welcome to The Wooden Spoon!** 🎉"
+      - ""
+      - "Your application has been **approved**, and you’re now whitelisted on the server."
+      - ""
+      - "Please make sure you’ve read the rules here:"
+      - "👉 https://www.tws.gg/rules"
+      - ""
+      - "If you’d like, feel free to introduce yourself in {channel:1105818494689361951}."
+      - "We’re glad to have you!"
+
+    more_info:
+      - "Hi, {mention}! Thanks for applying to **The Wooden Spoon** 🙂"
+      - ""
+      - "We just need a little more information before we can finish reviewing your application."
+      - "Could you tell us a bit about yourself outside of Minecraft?"
+      - ""
+      - "Things like hobbies, interests, or what you enjoy doing in your free time are great."
+      - ""
+      - "There’s no right or wrong answer here, we just like to know the people behind the players 💛"
+
+    denied_reasons:
+      # These reasons pop up as a dropdown for staff to pick from. You can only add up to 25 messages.
+      - label: "Under age requirement"
+        message:
+          - "Hi {mention}, thank you for applying, but unfortunately you don’t meet our age requirements"
+          - "as we are an adults-only server."
+          - ""
+          - "You’re welcome to reapply once you meet the criteria."
+
+      - label: "Low effort application"
+        message:
+          - "Thank you {mention}, for your interest in **The Wooden Spoon**."
+          - ""
+          - "Unfortunately, we've decided due to the low effort in the application"
+          - "to reject your application."
+
+      - label: "Not a good fit"
+        message:
+          - "{mention}"
+          - ""
+          - "Sorry, we’re going to deny your application as we don’t think you’re a good fit for our server."
+          - ""
+          - "We wish you luck on finding a server better suited for you!"
