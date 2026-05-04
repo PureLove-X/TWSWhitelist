@@ -26,27 +26,38 @@ public class DiscordBot {
     }
 
     public void start() throws Exception {
-        Message.suppressContentIntentWarning();
+        try {
+            Message.suppressContentIntentWarning();
 
-        jda = JDABuilder.createDefault(config.bot().token())
-                .enableIntents(
-                        GatewayIntent.GUILD_MESSAGES,
-                        GatewayIntent.MESSAGE_CONTENT
-                )
-                .addEventListeners(
-                        new WhitelistListener(config),
-                        new WhitelistSlashCommand(plugin, config)
-                )
-                .build();
+            jda = JDABuilder.createDefault(config.bot().token())
+                    .enableIntents(
+                            GatewayIntent.GUILD_MESSAGES,
+                            GatewayIntent.MESSAGE_CONTENT
+                    )
+                    .addEventListeners(
+                            new WhitelistListener(config),
+                            new WhitelistSlashCommand(plugin, config)
+                    )
+                    .build();
 
-        jda.awaitReady();
+            jda.awaitReady();
 
-        registerCommands();
+            registerCommands();
+
+        } catch (Exception e) {
+            shutdown();
+            throw e;
+        }
     }
 
     private void registerCommands() {
-        Objects.requireNonNull(jda.getGuildById(config.bot().serverId()))
-                .updateCommands()
+        var guild = jda.getGuildById(config.bot().serverId());
+
+        if (guild == null) {
+            throw new IllegalStateException("Bot cannot find Discord server/guild: " + config.bot().serverId());
+        }
+
+        guild.updateCommands()
                 .addCommands(
                         Commands.slash("devlist", "Manage the Minecraft whitelist")
                                 .addSubcommands(
@@ -60,8 +71,17 @@ public class DiscordBot {
     }
 
     public void shutdown() {
-        if (jda != null) {
+        if (jda == null) return;
+
+        try {
             jda.shutdownNow();
+
+            if (!jda.awaitShutdown(10, java.util.concurrent.TimeUnit.SECONDS)) {
+                System.out.println("JDA did not shut down cleanly within 10 seconds.");
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
             jda = null;
         }
     }

@@ -28,7 +28,7 @@ public class TWSWhitelistPlugin extends JavaPlugin {
         try {
             discordBot.start();
         } catch (Exception e) {
-            LogUtils.error("Failed to start Discord bot" + e.getMessage());
+            LogUtils.error("Failed to start Discord bot", e);
             getServer().getPluginManager().disablePlugin(this);
         }
     }
