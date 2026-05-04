@@ -38,7 +38,13 @@ public final class LogUtils {
     public static void error(String msg) {
         send(Level.SEVERE, tech.purelove.twswhitelist.util.SimpleColoredFormatter.RED + msg + tech.purelove.twswhitelist.util.SimpleColoredFormatter.RESET);
     }
-
+    public static void error(String msg, Throwable t) {
+        log.log(Level.SEVERE,
+                tech.purelove.twswhitelist.util.SimpleColoredFormatter.RED + msg
+                        + tech.purelove.twswhitelist.util.SimpleColoredFormatter.RESET,
+                t
+        );
+    }
     public static void debug(String msg) {
         send(Level.FINE, tech.purelove.twswhitelist.util.SimpleColoredFormatter.GRAY + msg + tech.purelove.twswhitelist.util.SimpleColoredFormatter.RESET);
     }
